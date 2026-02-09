@@ -78,13 +78,13 @@ pihole restartdns reload
 
 ## Philosophy
 
-**Small lists > big lists.**
+**Small tuned lists > big lists.**
 
-Blindly stacking massive third-party blocklists is a common Pi-hole pattern and it mostly fails at what it claims to do. Huge lists consume memory, slow down lookups, increase rule churn and introduce false positives all while blocking large numbers of domains that your network will never resolve.
+Blindly stacking massive third-party blocklists is a common pattern and it mostly fails at what it claims to do. Huge lists consume memory, slow down lookups, increase rule churn and introduce false positives all while blocking large numbers of domains that your network will never resolve.
 
 At the same time, keeping a tiny static list without context is just as ineffective. Blocking should be informed by actual network behavior, not guesswork or list hoarding.
 
-Tune My Hole takes a different approach:
+Tune My Hole takes a disgustingly straightforward approach:
 
 - Observe what your network actually queries
 - Validate those domains against known bad signals
