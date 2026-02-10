@@ -74,3 +74,39 @@ fn install_cron() {
 
     let _ = Command::new("sh").arg("-c").arg(cmd).status();
 }
+
+pub fn uninstall_system(paths: &Paths) -> Result<()> {
+    uninstall_systemd();
+    uninstall_cron();
+
+    for p in [
+        &paths.managed_list,
+        &paths.meta,
+        &paths.state,
+        &paths.config,
+    ] {
+        let _ = std::fs::remove_file(p);
+    }
+
+    let _ = std::fs::remove_dir(&paths.reference_dir);
+
+    Ok(())
+}
+
+fn uninstall_systemd() {
+    let _ = Command::new("systemctl")
+        .args(["disable", "--now", "tune-my-hole.timer"])
+        .status();
+
+    let _ = std::fs::remove_file("/etc/systemd/system/tune-my-hole.timer");
+    let _ = std::fs::remove_file("/etc/systemd/system/tune-my-hole.service");
+
+    let _ = Command::new("systemctl")
+        .args(["daemon-reload"])
+        .status();
+}
+
+fn uninstall_cron() {
+    let cmd = "(crontab -l 2>/dev/null | grep -v tune-my-hole) | crontab -";
+    let _ = Command::new("sh").arg("-c").arg(cmd).status();
+}

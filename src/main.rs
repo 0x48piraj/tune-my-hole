@@ -21,6 +21,7 @@ enum Command {
     Run,
     Status,
     Init,
+    Uninstall,
 }
 
 fn main() -> Result<()> {
@@ -31,6 +32,10 @@ fn main() -> Result<()> {
         Command::Init => {
             init_system(&paths)?;
             println!("Tune My Hole installed and scheduled.");
+        }
+        Command::Uninstall => {
+            tmhole::install::uninstall_system(&paths)?;
+            println!("Tune My Hole uninstalled.");
         }
         Command::Run => {
             let config = Config::load_or_default(&paths.config);
