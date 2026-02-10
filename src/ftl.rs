@@ -23,6 +23,7 @@ pub fn load_domain_stats(db: &PathBuf) -> Result<Vec<DomainStats>> {
         SELECT domain, COUNT(*) as cnt
         FROM queries
         WHERE domain IS NOT NULL
+          AND domain != ''
           AND status = 0
         GROUP BY domain
         "#,
