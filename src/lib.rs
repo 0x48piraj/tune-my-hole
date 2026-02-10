@@ -1,3 +1,4 @@
+pub mod core;
 pub mod domain;
 pub mod blocklist;
 pub mod ftl;
