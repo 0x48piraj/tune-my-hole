@@ -24,7 +24,7 @@ pub fn load_domain_stats(db: &PathBuf) -> Result<Vec<DomainStats>> {
         FROM queries
         WHERE domain IS NOT NULL
           AND domain != ''
-          AND status = 0
+          AND status NOT IN (1, 9) -- We exclude gravity-blocked domains (1, 9)
         GROUP BY domain
         "#,
     )?;
