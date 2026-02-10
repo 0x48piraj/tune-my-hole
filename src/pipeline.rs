@@ -47,6 +47,6 @@ pub fn run(paths: &Paths, config: &Config) -> Result<()> {
 
 fn reload_pihole() {
     let _ = std::process::Command::new("pihole")
-        .args(["restartdns", "reload-lists"])
+        .arg("reloadlists")
         .status();
 }
